@@ -11,22 +11,14 @@ import {
 } from "../../external/components/ui/carousel"
 
 import { Button } from "../../external/components/ui/button"
-import { useCartPanel } from "../context/useCartPanel"
-import { Product } from "../model/Product"
+
 
 function SingleProductPage() {
 
     interface Params { id: number }
     const { id } = useParams<keyof Params>() as unknown as Params
 
-    const [singleProduct, setSingleProduct] = useState<ProductData | null>(null);
-
-    const openPanel = useCartPanel(state => state.openPanel)
-
-    const addToCart = (product: Partial<Product>) => {
-        console.log(product,'pippo');
-      };
-    
+    const [singleProduct, setSingleProduct] = useState<ProductData | null>( null);
    
     useEffect(() => {
         const fetchSingleProduct = async () => {
@@ -81,10 +73,7 @@ function SingleProductPage() {
                     <p className="font-bold text-xs">{singleProduct?.brand}</p>
                     <p className="font-bold">Price: ${singleProduct?.price} | <span>Discount: ${singleProduct?.discountPercentage}</span></p>
                 </div>
-                <Button  className="p-2 rounded-lg mt-2 bg-slate-100" variant="outline" onClick={() => {
-                    openPanel(),
-                    () => addToCart(singleProduct)
-                }}>Add To Cart</Button>
+                <Button  className="p-2 rounded-lg mt-2 bg-slate-100" variant="outline" >Add To Cart</Button>
             </div>
         </div>
     )
